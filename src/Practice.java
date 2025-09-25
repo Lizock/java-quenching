@@ -142,7 +142,14 @@ public class Practice {
      * @return the number of levels in the tree
      */
     public static int levelCount(BinaryTreeNode<?> root) {
-        return 0;
+        if(root == null){
+            return 0;
+        }
+
+        int leftLevels = levelCount(root.left);
+        int rightLevels = levelCount(root.right);
+
+        return 1 + Math.max(leftLevels, rightLevels);
     }
 
 
