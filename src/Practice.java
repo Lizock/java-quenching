@@ -229,7 +229,22 @@ public class Practice {
      * @return the sum of all the vertices
      */
     public static int graphSum(Vertex<Integer> start) {
-        return 0;
+        Set<Vertex<Integer>> visited = new HashSet<>();
+        return dfsSumHelper(start, visited);
+    }
+
+    private static int dfsSumHelper(Vertex<Integer> vertex, Set<Vertex<Integer>> visited){
+        if (vertex == null || visited.contains(vertex)){
+            return 0;
+        }
+
+        visited.add(vertex);
+        int sum = vertex.data;
+
+        for (Vertex<Integer> neighbor : vertex.neighbors){
+            sum += dfsSumHelper(neighbor, visited);
+        }
+        return sum;
     }
 
     /**
