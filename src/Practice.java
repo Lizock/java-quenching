@@ -256,6 +256,25 @@ public class Practice {
      * @return the count of vertices with outdegree 0
      */
     public static int sinkCount(Vertex<Integer> start) {
-        return 0;
+        Set<Vertex<Integer>> visited = new HashSet<>();
+        return dfsSinkCountHelper(start, visited);
+    }
+
+    private static int dfsSinkCountHelper(Vertex<Integer> vertex, Set<Vertex<Integer>> visited) {
+        if (vertex == null || visited.contains(vertex)){
+            return 0;
+        }
+
+        visited.add(vertex);
+
+        int count = 0;
+        if (vertex.neighbors.isEmpty()){
+            count = 1;
+        }
+
+        for (Vertex<Integer> neighbor : vertex.neighbors) {
+            count += dfsSinkCountHelper(neighbor, visited);
+        } 
+        return count;
     }
 }
